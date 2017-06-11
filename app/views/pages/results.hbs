@@ -1,0 +1,12 @@
+{{!-- Populate with output from route controller, use correct markup --}}
+{{#if data}}
+    <h1 class="listings-results-count">{{data.count}} results found</h1>
+    <ul class="listings">
+        {{#each data.listings}}
+            <li>{{> listing this}}</li>
+        {{/each}}
+    </ul>
+{{else}}
+    <h1 class="listings-no-results">No results found</h1>
+    {{> search}}
+{{/if}}

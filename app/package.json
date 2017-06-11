@@ -1,0 +1,38 @@
+{
+  "name": "zoopla-test",
+  "version": "0.0.0",
+  "description": "Zoopla front end developer candidate test",
+  "main": "server/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "npm i",
+    "start": "npm i --production && node server/index.js",
+    "start-dev": "nodemon -e 'hbs js' server/index.js --ignore test/",
+    "test": "tap 'test/server/**/*.test.js' --cov",
+    "watch:server": "onchange 'server/**/*.js' 'test/server/**/**/*.js' -- npm run test -s",
+    "dev:server": "npm-run-all -p start-dev watch:server",
+    "dev": "npm-run-all -p start-dev watch:*",
+    "predev": "npm run build"
+  },
+  "author": "you@your-domain.com",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "1.10.2",
+    "npm-run-all": "3.1.0",
+    "onchange": "3.0.0",
+    "supertest": "^2.0.0",
+    "tap": "^10.3.0"
+  },
+  "dependencies": {
+    "body-parser": "1.15.2",
+    "compression": "1.6.2",
+    "express": "4.14.0",
+    "express-handlebars": "3.0.0",
+    "helmet": "2.1.2"
+  },
+  "engines": {
+    "node": "^6.5.0"
+  }
+}

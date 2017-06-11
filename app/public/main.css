@@ -1,0 +1,263 @@
+/* not using frameworks as requested but SASS would be beneficial here to achieve a DRY code */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    --figure-width: 354px;
+
+    font-family: sans-serif;
+    font-weight: normal;
+    --margin-unit: 16px;
+    --default-font-size: 16px;
+    --font-small: 13px;
+    --border-color: #aaaaaa;
+    --grey: #e5e5e5;
+    --secondary-grey: #5a636a;
+    --black: #303030;
+    --red: #d11c00;
+
+    --font-size: 16px;
+    --line-height: 1.4;
+    --lines-to-show: 5;
+
+    --scrollbox-height: calc(var(--font-size) * var(--line-height) * var(--lines-to-show));
+}
+
+html {
+    font-size: 100%
+}
+
+/* http://dabblet.com/gist/2462915 */
+.scrollbox {
+    overflow: auto;
+    max-height: var(--scrollbox-height);
+    margin: 50px auto;
+
+    background:
+        /* Shadow covers */
+        linear-gradient(white 30%, rgba(255,255,255,0)),
+        linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+
+            /* Shadows */
+        radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
+        radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+    background:
+        /* Shadow covers */
+        linear-gradient(white 30%, rgba(255,255,255,0)),
+        linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+
+            /* Shadows */
+        radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+        radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+    background-repeat: no-repeat;
+    background-color: white;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+
+    /* Opera doesn't support this in the shorthand */
+    background-attachment: local, local, scroll, scroll;
+}
+
+.search {
+    font-size: 18px;
+    margin: 13px 16px;
+}
+
+.search__input {
+    border: 1px solid var(--border-color);
+    padding: 5px;
+    height: 22px;
+    font-size: 15px;
+    margin: 5px 5px 10px 0;
+}
+
+.search__label {
+    display: block;
+    line-height: 1.3;
+    margin-bottom: 12px;
+}
+
+.search__submit-button {
+    border: 1px solid var(--border-color);
+    padding: 7px 16px;
+    background-color: #e4e4e4;
+    font-size: 15px;
+}
+
+.listings {
+    list-style-type: none;
+    margin: 0px var(--margin-unit) 0px var(--margin-unit);
+}
+
+.listings-results-count {
+    /*margin: 14px 16px;*/
+    margin: var(--margin-unit) var(--margin-unit);
+    font-size: var(--font-small);
+    font-weight: 500;
+    color: var(--secondary-grey);
+}
+
+.listing {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.listing__image {
+    border: 1px solid var(--border-color);
+    max-width: 100%;
+    max-height: auto;
+}
+
+.listing__title {
+    color: var(--black);
+    /*margin: 16px 0 12px 0;*/
+    margin: var(--margin-unit) 0 var(--margin-unit) 0;
+}
+
+.listing__price {
+    color: var(--red);
+    margin: 0 0 var(--margin-unit) 0;
+}
+
+.listing__description {
+    color: var(--secondary-grey);
+    margin: 0 0 var(--margin-unit) 0;
+
+    height: calc(var(--font-size) * var(--line-height) * var(--lines-to-show)); /* Fallback for non-webkit */
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    -webkit-line-clamp: var(--lines-to-show);
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+.listing__agent {
+    margin-bottom: 32px;
+    background-color: #e5e5e5;
+    color: var(--secondary-grey);
+    padding: 5px;
+}
+
+.listing__agent__details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.listing__agent__logo {
+    margin-bottom: 8px;
+}
+
+.listing__agent__name, .listing__agent__address, .listing__agent__phone {
+    margin: 0 5px 5px 0;
+    font-size: var(--font-small);
+}
+
+.listing__agent__details:last-child {
+    margin-bottom: 0;
+}
+
+/* --figure-width + (--margin-unit * 2) */
+@media screen and (min-width: 386px) and (max-width: 772px) {
+    .listings {
+        width: calc(var(--figure-width) + (var(--margin-unit) * 2));
+        margin: var(--margin-unit) auto;
+        padding-left: var(--margin-unit);
+    }
+}
+
+@media screen and (min-width: 772px) {
+
+    body {
+        --margin-unit: 24px;
+        --listing-height: 210px
+    }
+
+    .listings {
+        width: calc((var(--figure-width) * 2 ) + (var(--margin-unit) * 2));
+        margin: var(--margin-unit) auto;
+        padding-left: var(--margin-unit);
+    }
+
+
+    .listing {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .listing__image {
+        width: auto;
+        max-width: inherit; /* override default declaration */
+        height: calc(var(--listing-height) - 10px);
+    }
+
+    .listing__title {
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+
+    .listing__price {
+        margin: 5px 0 5px 0;
+    }
+
+    .listing__agent {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .listing__agent__name {
+        margin-left: 5px;
+    }
+
+    .listing__content {
+        max-width: 55%;
+    }
+
+    .listing__content {
+        margin: 0 var(--margin-unit) 0 var(--margin-unit);
+    }
+}
+
+@media screen and (min-width: 980px) {
+
+    body {
+        --margin-unit: 32px;
+        --listing-height: 210px
+    }
+
+    .listings {
+        width: 980px;
+        margin: var(--margin-unit) auto;
+        padding-left: var(--margin-unit);
+    }
+
+    .listing__agent__name {
+        margin-left: 0;
+    }
+
+    .listing {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+    }
+
+    .listing__content {
+        max-width: 100%;
+        flex-grow: 1;
+    }
+
+    .listing__agent {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 100%;
+        max-width: 160px;
+    }
+}
